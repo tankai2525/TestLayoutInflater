@@ -15,9 +15,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        main = (LinearLayout)findViewById(R.id.main);
+        main = (LinearLayout) findViewById(R.id.main);
         mLayoutInflate = LayoutInflater.from(this);
-        View button = mLayoutInflate.inflate(R.layout.button, null);
-        main.addView(button);
+
+        //1 加载button布局 root=null
+        //                View button = mLayoutInflate.inflate(R.layout.button, null);
+        //                main.addView(button);
+
+        //2 加载button布局 root=main attachToRoot=true
+        //        View button = mLayoutInflate.inflate(R.layout.button, main, true);//会添加到root中
+
+        //3 加载button布局 root=main attachToRoot=false
+        View button = mLayoutInflate.inflate(R.layout.button, main, false);//会把root产生的layoutparams设置给button
+        main.addView(button);//当button被添加后layoutparams会起作用
+
     }
 }
